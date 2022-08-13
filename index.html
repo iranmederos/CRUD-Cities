@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciudades del mundo</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://kit.fontawesome.com/343bb0abe6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white">Acerca de</h4>
+                        <p class="text-muted">Mi nombre es Iran Mederos, este proyecto es realizado con la intención de
+                            practicar los conocimientos adquiridos en el curso de fullstack
+                            con codo a codo 4.0</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">Contacto</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white"><i class="fa-brands fa-twitter"></i>Twitter</a></li>
+                            <li><a href="#" class="text-white"><i class="fa-brands fa-facebook"></i>Facebook</a></li>
+                            <li><a href="#" class="text-white"><i class="fa-solid fa-envelope"></i>Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a href="index.html" class="navbar-brand d-flex align-items-center">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <strong>Ciudades del mundo</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main
+        style="background: url('https://www.eltiempo.com/files/article_multimedia/uploads/2020/10/26/5f97336671a03.jpeg'); background-position: top center">
+
+
+
+
+        <!--Seccion de introduccion-->
+        <section class="py-5 text-center container" style="background-color: #11111196; color:aliceblue">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">Una pequeña colección de ciudades del mundo</h1>
+                    <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia amet
+                        velit eius quasi eum eligendi possimus, nostrum, accusamus quis laborum sit accusantium
+                        perferendis odio aliquam quae optio impedit repellat. Laudantium?</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ventanaModal">
+                        Agregar ciudad
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!--Fin de la seccion de introduccion-->
+
+
+
+
+
+
+
+        <!--Tarjetas de las ciudades-->
+        <div class="album py-5 bg-light">
+            <div class="container" id="app">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div v-for="ciudad in ciudades" class="col">
+                        <div class="card shadow-sm">
+
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="225" :src=ciudad.imagen
+                                alt="" srcset="">
+
+                            <div class="card-body">
+                                <strong>{{ciudad.nombre}}</strong>
+                                <p class="card-text">{{ciudad.descripcion}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a :href="'update.html?id='+ciudad.id+'&nombre='+ciudad.nombre+'&imagen='+ciudad.imagen+'&descripcion='+ciudad.descripcion"
+                                            class="btn btn-sm btn-primary">Modificar</a>
+
+                                        <button type="button" v-on:click="eliminar(ciudad.id)"
+                                            class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--Fin tarjetas de las ciudades-->
+
+        <!--Modal creador de las ciudades-->
+        <div class="modal fade" id="ventanaModal" tabindex="-1" role="dialog" aria-labelledby="tituloVentana"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="tituloVentana">Agregar ciudad</h5>
+                    </div>
+                    <div class="modal-body">
+
+                        <form>
+                            <div class="mb-3">
+                                <label for="txtNombre">Nombre</label>
+                                <input type="text" class="form-control" name="txtNombre" id="txtNombre"><br>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtImagen">Url imagen</label>
+                                <input type="text" class="form-control" name="txtimagen" id="txtimagen"> <br>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtDescripcion">Descripción</label>
+                                <textarea class="form-control" id="txtDescripcion" rows="3"></textarea><br>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" type="button" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-success" type="button" onclick="guardar()">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Modal creador de las ciudades-->
+
+        <!--Modal modificador de las ciudades-->
+        <div class="modal fade" id="ventanaModal2" tabindex="-1" role="dialog" aria-labelledby="tituloVentana2"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="tituloVentana2">Modificar ciudad</h5>
+                    </div>
+                    <div class="modal-body">
+
+                        <form>
+                            <div class="mb-3">
+                                <label for="txtId">Id</label>
+                                <input type="text" class="form-control" name="txtId" id="txtId" disabled><br>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtNombre2">Nombre</label>
+                                <input type="text" class="form-control" name="txtNombre2" id="txtNombre2"><br>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtImagen2">Url imagen</label>
+                                <input type="text" class="form-control" name="txtImagen2" id="txtImagen2"> <br>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtDescripcion2">Descripción</label>
+                                <textarea class="form-control" name="txtDescripcion2" id="txtDescripcion2"
+                                    rows="3"></textarea><br>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" type="button" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-success" type="button" onclick="modificar()">
+                            Modificar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Modal modificador de las ciudades-->
+    </main>
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <div class="container">
+            <p class="float-end mb-1">
+                <a id="botonF" href="#"><i class="fa-solid fa-circle-up fa-2xl"></i></a>
+            </p>
+            <p class="mb-1">Ciudades del mundo &copy;</p>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-black"><i class="fa-brands fa-twitter"></i>Twitter</a></li>
+                <li><a href="#" class="text-black"><i class="fa-brands fa-facebook"></i>Facebook</a></li>
+                <li><a href="#" class="text-black"><i class="fa-solid fa-envelope"></i>Email</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="./src/js/main.js"></script>
+    <script src="src\js\create.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</body>
